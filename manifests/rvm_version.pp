@@ -13,7 +13,8 @@ class rails::rvm_version (
     mode    => '0644',
     content => "umask g+w
 rvm_trust_rvmrcs_flag=1
-rvm_auto_reload_flag=2",
+rvm_auto_reload_flag=2
+rvm_autoupdate_flag=0",
   }
 
   # generate no docs for gems
