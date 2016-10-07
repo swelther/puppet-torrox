@@ -1,5 +1,5 @@
 class rails::rvm_version (
-  $version = latest,
+  $version = undef,
 ) {
   class { 'rvm':
     version     => $version,
