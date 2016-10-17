@@ -4,8 +4,8 @@ fixtures:
       repo: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
       ref: "1ffd72d"
     rvm:
-      repo: "git://github.com/kronn/puppet-rvm.git"
-      ref: "d3ca734"
+      repo: "git://github.com/swelther/puppet-rvm.git"
+      ref: "14ba89f"
   symlinks:
     apache: "#{source_dir}/../apache"
     logrotate: "#{source_dir}/../logrotate"
