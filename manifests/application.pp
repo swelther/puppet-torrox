@@ -19,6 +19,10 @@ define rails::application(
 
   include packages::cron
 
+  class { '::logrotate':
+    ensure => 'latest',
+  }
+
   logrotate::rule { "${app_name}-${rails_env}":
     path          => "${deploy_to}/shared/log/*.log",
     rotate        => 99,
