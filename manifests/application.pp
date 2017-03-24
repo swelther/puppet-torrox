@@ -19,8 +19,10 @@ define rails::application(
 
   include packages::cron
 
-  class { '::logrotate':
-    ensure => 'latest',
+  unless defined(Class['::logrotate']) {
+    class { '::logrotate':
+      ensure => 'latest',
+    }
   }
 
   logrotate::rule { "${app_name}-${rails_env}":
