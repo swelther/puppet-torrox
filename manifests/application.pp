@@ -111,7 +111,7 @@ define rails::application(
       group   => $user,
       owner   => $user,
       target  => "${deploy_to}/releases/00000000000000",
-      require => File["${deploy_to}/releases/00000000000000"],
+      require => Exec['create dummy release if no releases exists'],
       replace => false;
 
     "${deploy_to}/current/public":
