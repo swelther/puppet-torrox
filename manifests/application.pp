@@ -128,7 +128,7 @@ define rails::application(
     path    => '/bin:/usr/bin',
     user    => 'root',
     creates => "${deploy_to}/releases/00000000000000",
-    onlyif  => "test $(find ${deploy_to}/releases/ -maxdepth 1 -type d | wc -l) -gt 1",
+    onlyif  => "test $(find ${deploy_to}/releases/ -maxdepth 1 -type d | wc -l) -eq 1",
     require => File["${deploy_to}/releases"],
   }
 
