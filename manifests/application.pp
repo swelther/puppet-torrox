@@ -111,7 +111,7 @@ define rails::application(
       group   => $user,
       owner   => $user,
       target  => "${deploy_to}/releases/00000000000000",
-      require => Exec['create dummy release if no releases exists'],
+      require => Exec["create dummy release for ${app_name}-${rails_env}"],
       replace => false;
 
     "${deploy_to}/current/public":
@@ -123,7 +123,7 @@ define rails::application(
       owner   => $user;
   }
 
-  exec { 'create dummy release if no releases exists':
+  exec { "create dummy release for ${app_name}-${rails_env}":
     command => "mkdir ${deploy_to}/releases/00000000000000 && chown -R ${user} ${deploy_to}/releases/00000000000000",
     path    => '/bin:/usr/bin',
     user    => 'root',
