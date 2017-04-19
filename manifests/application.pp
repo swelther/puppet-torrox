@@ -106,14 +106,6 @@ define rails::application(
       replace => false,
       owner   => $user;
 
-    # create a dummy release so we can symlink it as document root for apache
-    "${deploy_to}/releases/00000000000000":
-      ensure  => directory,
-      require => File["${deploy_to}/releases"],
-      group   => $user,
-      mode    => '0755',
-      owner   => $user;
-
     "${deploy_to}/current":
       ensure  => link,
       group   => $user,
@@ -129,6 +121,15 @@ define rails::application(
       mode    => '0755',
       replace => false,
       owner   => $user;
+  }
+
+  exec { 'create dummy release if no releases exists':
+    command => "mkdir ${deploy_to}/releases/00000000000000 && chown -R ${user} ${deploy_to}/releases/00000000000000",
+    path    => '/bin:/usr/bin',
+    user    => 'root',
+    creates => "${deploy_to}/releases/00000000000000",
+    onlyif  => "test $(find ${deploy_to}/releases/ -maxdepth 1 -type d | wc -l) -gt 1",
+    require => File["${deploy_to}/releases"],
   }
 
   case $capistrano_version {
